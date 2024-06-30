@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'ver_compras' %}">Ver Compras</a></li>
+            <li><a href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
+            <li><a href="{% url 'agregar_detalle_compra' %}">Agregar Detalle de Compra</a></li>
+            <li class="login-button"><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Productos</h1>
+        <div class="product-list">
+            <div class="product">
+                <img src="" alt="Producto 1">
+                <h2>Producto 1</h2>
+                <p>$19.99</p>
+                <button>Agregar al Carrito</button>
+                <button>Ver Detalles</button>
+            </div>
+            <div class="product">
+                <img src="" alt="Producto 2">
+                <h2>Producto 2</h2>
+                <p>$29.99</p>
+                <button>Agregar al Carrito</button>
+                <button>Ver Detalles</button>
+            </div>
+            <!-- Añade más productos aquí -->
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav {
+        background-color: #343a40;
+        padding: 10px;
+    }
+    
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        margin: 0 15px;
+    }
+    
+    nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .container {
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .product-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .product {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 20px;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+    
+    .product h2 {
+        color: #343a40;
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+    
+    .product p {
+        color: #007bff;
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+    
+    .product button {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    .product button:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+</html>

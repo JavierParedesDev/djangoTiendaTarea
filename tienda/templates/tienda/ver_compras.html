@@ -1,0 +1,6 @@
+<h1>Mis Compras</h1>
+<ul>
+    {% for compra in compras %}
+        <li>{{ compra.fecha }} - {{ compra.detalles.all|join:", " }}</li>
+    {% endfor %}
+</ul>
