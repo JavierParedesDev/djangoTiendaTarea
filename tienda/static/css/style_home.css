@@ -1,0 +1,218 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+}
+
+header {
+    background-color: #44106e; /* Morado */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0; /* Añade un padding superior e inferior */
+    margin: 0;
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.25); /* Ajusta el color del box-shadow */
+    animation: neon 20s infinite linear;
+    background-color: #44106e; /* Morado */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    padding: 10px; /* Aumenta el padding para hacer los ítems más clickeables */
+    margin: 0 5px; /* Añade un margen entre ítems */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Añade una transición suave */
+    color: #fff; /* Color del texto */
+}
+
+nav ul a:hover {
+    background-color: #f80269; /* Rosado al hacer hover */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Color del texto */
+    font-weight: bold;
+    font-size: 15px;
+    display: block; /* Hace que los enlaces ocupen todo el espacio del ítem */
+    padding: 10px 20px; /* Espaciado interior */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Borde redondeado */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+
+}
+
+nav ul li a:hover {
+    color: white; /* letras del nav  */ 
+}
+
+.nav-a {
+    text-decoration: none; /* Sin subrayado */
+    color: #fff; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 30px; /* Tamaño del texto */
+    padding: 15px 15px; /* Espaciado interior */
+    
+}
+
+.nav-a:hover {
+    color: #fff; /* Rosado al hacer hover */
+}
+
+
+.banner {
+    background-color: #44106e; /* Color de fondo morado */
+    color: #fff; /* Color del texto blanco */
+    text-align: center;
+    padding: 20px; /* Espaciado interior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+.banner-images {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.banner-images img {
+    max-width: 25%; /* Ajusta el tamaño de las imágenes */
+    height: auto; /* Mantiene la proporción */
+}
+.button {
+    display: inline-block;
+    background-color: transparent; /* Fondo transparente */
+    color: #fff; /* Color del texto blanco */
+    padding: 12px; /* Espaciado interior */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 50%; /* Borde redondeado */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    margin-top: 20px; /* Espacio superior */
+    font-size: 2rem; /* Tamaño del ícono */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor tipo puntero */
+}
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Cambio de color de fondo al hacer hover */
+}
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-footer {
+    background: #fff;
+    border-top: 0;
+}
+
+.custom-card {
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+    height: 450px; /* Ajusta la altura según tus necesidades */
+}
+.card-footer {
+    background: #fff; /* Color de fondo del contenedor */
+    border-top: 0;
+    text-align: center; /* Centra el contenido */
+    padding: 10px; /* Espaciado interior */
+}
+
+.boton {
+    display: inline-block; /* Hace que el enlace se comporte como un bloque en línea */
+    background-color: #44106e; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interior */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Borde redondeado */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    
+    &:hover {
+        background-color: #f80269; /* Color de fondo al hacer hover */
+    }
+}
+.boton:hover{
+    color: #fff;
+}
+.img-fixed-size {
+    height: 250px; /* Ajusta la altura de la imagen */
+    object-fit: cover; /* Para mantener el aspecto de la imagen */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #44106e;
+    color: #fff;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    background-color:#310c50;
+    color: #ccc;
+    padding: 10px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
