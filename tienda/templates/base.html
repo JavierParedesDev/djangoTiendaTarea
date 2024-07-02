@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Tienda{% endblock %}</title>
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleDash.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="{% url 'home' %}">Home</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}">Login</a>
-            {% endif %}
-        </nav>
-    </header>
-    <div>
-        {% block content %}{% endblock %}
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Mi<br><span>A D M I N</span></h1>
+            </div>
+            <ul>
+                <li><a href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
+                <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
+                <li><a href="{% url 'add_admin' %}">Agregar Admin</a></li>
+            </ul>
+            <div class="logout">
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            </div>
+        </aside>
+        <main class="content">
+            {% block content %}
+            {% endblock %}
+        </main>
     </div>
 </body>
 </html>

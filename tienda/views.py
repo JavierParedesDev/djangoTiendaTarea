@@ -7,6 +7,10 @@ def home(request):
     return render(request, 'tienda/home.html')
 
 @login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+@login_required
 def ver_compras(request):
     compras = Compra.objects.filter(usuario=request.user)
     return render(request, 'tienda/ver_compras.html', {'compras': compras})
@@ -20,7 +24,7 @@ def agregar_producto(request):
             return redirect('lista_productos') 
     else:
         form = ProductoForm()
-    return render(request, 'tienda/agregar_producto.html', {'form': form})
+    return render(request, 'agregar_producto.html', {'form': form})
 
 @login_required
 def agregar_detalle_compra(request):
@@ -33,12 +37,16 @@ def agregar_detalle_compra(request):
             return redirect('ver_compras')
     else:
         form = DetalleCompraForm()
-    return render(request, 'tienda/agregar_detalle_compra.html', {'form': form})
+    return render(request, 'agregar_detalle_compra.html', {'form': form})
 
 @login_required
 def lista_productos(request):
     productos = Producto.objects.all()
-    return render(request, 'tienda/lista_productos.html', {'productos': productos})
+    return render(request, 'lista_productos.html', {'productos': productos})
+
+@login_required
+def add_admin(request):
+    return render(request, 'add_admin.html')
 
 @login_required
 def eliminar_producto(request, producto_id):
