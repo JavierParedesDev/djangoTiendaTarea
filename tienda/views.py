@@ -47,3 +47,5 @@ def eliminar_producto(request, producto_id):
         producto.delete()
         return redirect('lista_productos')
     return redirect('lista_productos')
+
+
