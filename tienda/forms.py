@@ -39,7 +39,7 @@ class AdminCreationForm(forms.ModelForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'stock']
+        fields = ['nombre', 'precio', 'precio_descuento', 'imagen', 'descripcion', 'estrellas', 'stock']
 
 class DetalleCompraForm(forms.ModelForm):
     class Meta:

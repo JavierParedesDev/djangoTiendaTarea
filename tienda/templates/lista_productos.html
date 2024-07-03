@@ -16,6 +16,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Imagen</th>
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Stock</th>
@@ -25,6 +26,7 @@
             {% for producto in productos %}
             <tr>
                 <td>{{ producto.nombre }}</td>
+                <td>{{ producto.imagen }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio }}</td>
                 <td>{{ producto.stock }}</td>

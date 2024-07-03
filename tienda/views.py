@@ -4,7 +4,8 @@ from .models import Producto, Compra, DetalleCompra
 from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm
 
 def home(request):
-    return render(request, 'tienda/home.html')
+    productos = Producto.objects.all()
+    return render(request, 'tienda/home.html', {'productos': productos})
 
 @login_required
 def dashboard(request):
@@ -18,7 +19,7 @@ def ver_compras(request):
 @login_required
 def agregar_producto(request):
     if request.method == 'POST':
-        form = ProductoForm(request.POST)
+        form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('lista_productos') 

@@ -8,7 +8,10 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_descuento = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  
+    imagen = models.ImageField(upload_to='productos/', blank=True, null=True)
     stock = models.PositiveIntegerField()
+    estrellas = models.IntegerField(default=0) 
 
     def __str__(self):
         return self.nombre
@@ -32,7 +35,7 @@ class Persona(models.Model):
     contraseña = models.CharField(max_length=128, help_text="Contraseña de la persona")
 
     def save(self, *args, **kwargs):
-        # Al guardar la contraseña, la encriptamos
+        # Verificar si la contraseña ha sido modificada o es una nueva instancia
         if not self.pk or 'contraseña' in self.get_dirty_fields():
             self.contraseña = make_password(self.contraseña)
         super().save(*args, **kwargs)
