@@ -1,48 +1,53 @@
-/* static/css/styles.css */
-
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
-    color: #333;
-}
 
-.producto-form {
-    width: 50%;
-    margin: 0 auto;
+.content h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color:  #44106e;;
+}
+.content form {
+    background-color: white;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    text-align: center;
+    color: #44106e;
 }
-
-.producto-form label {
-    display: block;
-    margin-bottom: 10px;
+.content form label {
     font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
 }
-
-.producto-form input[type="text"],
-.producto-form textarea,
-.producto-form input[type="number"] {
-    width: 100%;
-    padding: 8px;
+.content form input[type="text"],
+.content form input[type="number"] {
+    width: 80%;
+    padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 1px solid #000000;
+    border-radius: 4px;
     box-sizing: border-box;
+    font-size: 14px;
+    
 }
-
-.btn-agregar {
-    background-color: #4CAF50;
+.content form button[type="submit"] {
+    background-color: #44106e;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 3px;
+    padding: 10px 20px;
     cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    
 }
-
-.btn-agregar:hover {
-    background-color: #45a049;
+.content form button[type="submit"]:hover {
+    background-color: #f80269 ;
 }
