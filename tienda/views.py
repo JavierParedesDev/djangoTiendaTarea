@@ -45,8 +45,15 @@ def lista_productos(request):
     return render(request, 'lista_productos.html', {'productos': productos})
 
 @login_required
-def add_admin(request):
-    return render(request, 'add_admin.html')
+def agregar_administrador(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = UserCreationForm()
+    return render(request, 'add_admin.html', {'form': form})
 
 @login_required
 def eliminar_producto(request, producto_id):
