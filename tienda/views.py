@@ -65,4 +65,7 @@ def eliminar_producto(request, producto_id):
         return redirect('lista_productos')
     return redirect('lista_productos')
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
