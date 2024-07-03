@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Producto, Compra, DetalleCompra
-from .forms import ProductoForm, DetalleCompraForm
+from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm
 
 def home(request):
     return render(request, 'tienda/home.html')
@@ -44,9 +44,6 @@ def lista_productos(request):
     productos = Producto.objects.all()
     return render(request, 'lista_productos.html', {'productos': productos})
 
-@login_required
-def add_admin(request):
-    return render(request, 'add_admin.html')
 
 @login_required
 def eliminar_producto(request, producto_id):
@@ -56,4 +53,14 @@ def eliminar_producto(request, producto_id):
         return redirect('lista_productos')
     return redirect('lista_productos')
 
-
+@login_required
+def crear_admin(request):
+    if request.method == 'POST':
+        form = AdminCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # O redirige a donde desees después de crear el usuario
+    else:
+        form = AdminCreationForm()
+    
+    return render(request, 'crear_admin.html', {'form': form})
