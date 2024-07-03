@@ -1,11 +1,9 @@
-<!-- tienda/templates/dashboard.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}Dashboard{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styleDash.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles_add.css' %}">
 </head>
 <body>
     <div class="container">
@@ -16,10 +14,12 @@
             <ul>
                 <li><a href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
                 <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
-                <li><a href="{% url 'crear_admin' %}">Crear Admin</a></li>
             </ul>
             <div class="logout">
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar Sesión</button>
+                </form>
             </div>
         </aside>
         <main class="content">

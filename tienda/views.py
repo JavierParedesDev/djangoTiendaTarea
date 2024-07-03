@@ -64,3 +64,8 @@ def crear_admin(request):
         form = AdminCreationForm()
     
     return render(request, 'crear_admin.html', {'form': form})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
