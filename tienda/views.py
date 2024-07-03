@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Producto, Compra, DetalleCompra
 from .forms import ProductoForm, DetalleCompraForm
+from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 def home(request):
     return render(request, 'tienda/home.html')
@@ -62,5 +64,10 @@ def eliminar_producto(request, producto_id):
         producto.delete()
         return redirect('lista_productos')
     return redirect('lista_productos')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 

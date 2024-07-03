@@ -12,3 +12,8 @@ class DetalleCompraForm(forms.ModelForm):
     class Meta:
         model = DetalleCompra
         fields = ['producto', 'cantidad']
+
+class AdminForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

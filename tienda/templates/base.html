@@ -16,7 +16,10 @@
                 <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
             </ul>
             <div class="logout">
-                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar Sesión</button>
+                </form>
             </div>
         </aside>
         <main class="content">
