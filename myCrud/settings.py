@@ -139,3 +139,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'tienda/static/css'),
 ]
 LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = 'dashboard' 
