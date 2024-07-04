@@ -1,7 +1,10 @@
+from pyexpat.errors import messages
+from telnetlib import LOGOUT
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Producto, Compra, DetalleCompra
 from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm
+from tienda.models import Producto, Carrito, ItemCarrito
 
 def home(request):
     productos = Producto.objects.all()
@@ -80,5 +83,55 @@ def eliminar_producto(request, pk):
 
 @login_required
 def logout_view(request):
-    logout(request)
+    LOGOUT(request)
     return redirect('home')
+
+
+#carrito
+
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    item, item_created = ItemCarrito.objects.get_or_create(carrito=carrito, producto=producto)
+    if not item_created:
+        item.cantidad += 1
+        item.save()
+    return redirect('ver_carrito')
+
+def ver_carrito(request):
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    items = carrito.items.all()
+    total = sum(item.producto.precio * item.cantidad for item in items)
+    return render(request, 'carrito.html', {'items': items, 'total': total})
+
+def eliminar_del_carrito(request, item_id):
+    item = get_object_or_404(ItemCarrito, id=item_id)
+    item.delete()
+    return redirect('ver_carrito')
+
+def procesar_pago(request):
+    if request.method == 'POST':
+        # Lógica para procesar el pago (puedes agregar la integración con un proveedor de pagos aquí)
+        
+        # Obtener todos los elementos del carrito para el usuario actual
+        items_carrito = ItemCarrito.objects.filter(usuario=request.user)
+        
+        # Crear detalles de compra basados en los elementos del carrito
+        for item in items_carrito:
+            detalle_compra = DetalleCompra.objects.create(
+                usuario=request.user,
+                producto=item.producto,
+                cantidad=item.cantidad
+            )
+        
+        # Limpiar el carrito eliminando todos los elementos
+        items_carrito.delete()
+        
+        # Mensaje de pago exitoso
+        messages.success(request, '¡Pago exitoso! Gracias por tu compra.')
+        
+        # Redirigir a una página de confirmación o a donde desees después del pago
+        return redirect('ver_carrito')  # Ajusta la URL según sea necesario
+    
+    # Si no es un POST, probablemente deberías manejarlo de otra manera (por ejemplo, redirigiendo a una página de error)
+    return redirect('home')  # Redirige a la página de inicio o a otra página apropiada

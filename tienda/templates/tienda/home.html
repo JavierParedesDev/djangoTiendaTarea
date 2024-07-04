@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="{% static 'style_home.css' %}">
 </head>
 <body>
+
     <nav class="nav">
         <h1><a class="nav-a" href="{% url 'home' %}">Start Shop</a></h1>
         <div>
             <ul>
                 <li>
                     <a href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
                 <li>
                     <a href="{% url 'login' %}" > Iniciar Sesión</a> 
@@ -41,22 +45,21 @@
         <div class="container">
             <div class="row">
                 {% for producto in productos %}
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{{ producto.imagen.url }}" alt="" class="img-fixed-size card-img-top">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text text-muted"><del>${{ producto.precio_anterior }}</del> ${{ producto.precio_actual }}</p>
-                                <p class="card-text text-warning">
-                                    {% for _ in producto.star_range %}
-                                        <i class="fas fa-star"></i>
-                                    {% endfor %}
-                                </p>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir al carrito</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted">${{ producto.precio }}</small>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="boton">Añadir a carrito</a>
                         </div>
                     </div>
                 </div>
