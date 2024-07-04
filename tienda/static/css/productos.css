@@ -1,33 +1,57 @@
-.container2{
+.container2 {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centrar contenido horizontalmente */
 }
-
 
 .productos-list {
     display: flex;
     flex-direction: column;
     gap: 20px; 
+    width: 100%; /* Ajustar ancho al contenedor */
+    max-width: 800px; /* Ancho máximo para controlar el tamaño */
+    margin-top: 20px; /* Margen superior */
 }
 
 .producto-card {
     display: flex;
     flex-direction: row;
+    align-items: center; /* Centrar verticalmente */
+    gap: 20px; /* Espacio entre elementos */
+    padding: 30px; /* Espaciado interno */
+    background-color: #f0f0f0; /* Color de fondo opcional */
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+
+.producto-img img {
+    max-width: 500px; /* Imagen más grande */
+    height: auto;
+    border-radius: 8px; /* Bordes redondeados */
+    object-fit: cover; /* Ajuste de la imagen */
 }
 
 .producto-info {
     flex: 1; 
     display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente el texto */
+    margin-left: 15px; /* Margen izquierdo para separación */
+    text-align: center; /* Centrar el texto horizontalmente */
 }
 
-.producto-img img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
+.producto-info h2 {
+    margin: 0; /* Quitar márgenes */
+}
+
+.producto-info p {
+    margin: 5px 0; /* Margen vertical para separación */
 }
 
 .producto-actions {
     margin-top: 10px;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente los botones */
 }
 
 .producto-actions .btn {
