@@ -2,8 +2,10 @@ from django import forms
 from .models import Producto, DetalleCompra
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django import forms
 
 class AdminCreationForm(forms.ModelForm):
+    
     password = forms.CharField(
         label='Contraseña',
         widget=forms.PasswordInput,
@@ -39,7 +41,7 @@ class AdminCreationForm(forms.ModelForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'stock']
+        fields = ['nombre', 'descripcion', 'precio', 'stock', 'imagen']
 
 class DetalleCompraForm(forms.ModelForm):
     class Meta:

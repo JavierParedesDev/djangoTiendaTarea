@@ -1,0 +1,35 @@
+.container2{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.productos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.producto-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.producto-info {
+    flex: 1; 
+    display: flex;
+}
+
+.producto-img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.producto-actions {
+    margin-top: 10px;
+}
+
+.producto-actions .btn {
+    margin-right: 10px;
+}
