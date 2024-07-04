@@ -4,7 +4,8 @@ from .models import Producto, Compra, DetalleCompra
 from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm
 
 def home(request):
-    return render(request, 'tienda/home.html')
+    productos = Producto.objects.all()
+    return render(request, 'tienda/home.html', {'productos': productos})
 
 @login_required
 def dashboard(request):
@@ -18,10 +19,10 @@ def ver_compras(request):
 @login_required
 def agregar_producto(request):
     if request.method == 'POST':
-        form = ProductoForm(request.POST)
+        form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('lista_productos') 
+            return redirect('lista_productos')  
     else:
         form = ProductoForm()
     return render(request, 'agregar_producto.html', {'form': form})
@@ -46,14 +47,6 @@ def lista_productos(request):
 
 
 @login_required
-def eliminar_producto(request, producto_id):
-    producto = Producto.objects.get(pk=producto_id)
-    if request.method == 'POST':
-        producto.delete()
-        return redirect('lista_productos')
-    return redirect('lista_productos')
-
-@login_required
 def crear_admin(request):
     if request.method == 'POST':
         form = AdminCreationForm(request.POST)
@@ -64,6 +57,26 @@ def crear_admin(request):
         form = AdminCreationForm()
     
     return render(request, 'crear_admin.html', {'form': form})
+
+@login_required
+def editar_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_productos')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'editar_producto.html', {'form': form})
+
+@login_required
+def eliminar_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('lista_productos')
+    return render(request, 'eliminar_producto.html', {'producto': producto})
 
 @login_required
 def logout_view(request):
