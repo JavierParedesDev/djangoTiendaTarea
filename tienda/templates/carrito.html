@@ -1,0 +1,70 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style_home.css' %}">
+</head>
+<body>
+    
+    <nav class="nav">
+        <h1><a class="nav-a" href="{% url 'home' %}">Start Shop</a></h1>
+        <div>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'ver_carrito' %}">Carrito</a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}" > Iniciar Sesión</a> 
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Carrito de Compras</h1>
+
+    <div class="carrito-list">
+        {% for item in items %}
+        <div class="item-carrito card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ item.producto.imagen.url }}" class="img-fluid rounded-start" alt="{{ item.producto.nombre }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ item.producto.nombre }}</h2>
+                        <p class="card-text">{{ item.producto.descripcion }}</p>
+                        <p class="card-text"><small class="text-muted">Precio: ${{ item.producto.precio }}</small></p>
+                        <p class="card-text">Cantidad: {{ item.cantidad }}</p>
+                        <a href="{% url 'eliminar_del_carrito' item.id %}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info" role="alert">
+            No hay productos en tu carrito.
+        </div>
+        {% endfor %}
+    </div>
+    
+    <p class="total">Total: ${{ total }}</p>
+    <div class="btn-container">
+        <a href="{% url 'procesar_pago' %}" class="btn-pagar">Pagar</a>
+    </div>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</body>
+</html>

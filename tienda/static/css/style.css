@@ -1,0 +1,72 @@
+h1{
+    text-align: center;
+    margin: 10px;
+}
+.carrito-list {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.item-carrito {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.item-carrito img {
+    max-width: 50%;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.item-carrito .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-carrito .card-text {
+    margin-bottom: 5px;
+}
+
+.item-carrito .precio {
+    font-size: 0.875rem;
+}
+
+.item-carrito .cantidad {
+    font-size: 0.875rem;
+}
+
+.total {
+    width: 30%;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin:0 auto;
+    background-color: blueviolet;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+.btn-pagar{
+    padding: 10px 30px;
+    background-color: #29af00;
+    color: #fff;
+    margin: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+
+    &:hover{
+        text-decoration: none;
+        color: #fff;
+        background-color: #1a6e00;
+    }
+
+}
+.btn-container{
+    margin: 10px;
+    padding: 10px;
+}
