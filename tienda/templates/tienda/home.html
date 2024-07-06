@@ -26,14 +26,16 @@
                         <li>
                             <a href="{% url 'dashboard' %}">Administrar</a>
                         </li>
-                    {% else %}
-                        <li>
-                            <form action="{% url 'logout' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-link">Cerrar Sesión</button>
-                            </form>
-                        </li>
                     {% endif %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                    <li>
+                        <span>{{ user.username }}</span>
+                    </li>
                 {% else %}
                     <li>
                         <a href="{% url 'login' %}">Iniciar Sesión</a>

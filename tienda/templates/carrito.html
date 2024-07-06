@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +22,16 @@
                     <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
                 <li>
-                    <a href="{% url 'login' %}" > Iniciar Sesión</a> 
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">Cerrar Sesión</button>
+                    </form>
                 </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <span>{{ user.username }}</span>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -58,13 +66,8 @@
     <div class="btn-container">
         <a href="{% url 'procesar_pago' %}" class="btn-pagar">Pagar</a>
     </div>
-    {% if messages %}
-    <div class="alert alert-success" role="alert">
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </div>
-    {% endif %}
+   
+    
 
 </body>
 </html>
