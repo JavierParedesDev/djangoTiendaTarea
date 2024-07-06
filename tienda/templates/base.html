@@ -16,6 +16,13 @@
                 <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
                 <li><a href="{% url 'crear_admin' %}">Crear Usuario</a></li>
             </ul>
+            <!-- Mostrar nombre de usuario conectado -->
+            <div class="username">
+                {% if request.user.is_authenticated %}
+                    <p>Bienvenido, {{ request.user.username }}</p>
+                {% endif %}
+            </div>
+            <!-- Fin de la sección de nombre de usuario -->
             <div class="logout">
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}

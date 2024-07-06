@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home, name='home'), 
+    path('registro/', views.registro, name='registro'),
     path('compras/', views.ver_compras, name='ver_compras'),
     path('agregar-producto/', views.agregar_producto, name='agregar_producto'),
     path('agregar-detalle-compra/', views.agregar_detalle_compra, name='agregar_detalle_compra'),
@@ -19,6 +20,7 @@ urlpatterns = [
     path('ver-carrito/', views.ver_carrito, name='ver_carrito'),
     path('eliminar-del-carrito/<int:item_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('procesar-pago/', views.procesar_pago, name='procesar_pago'),
+    path('login/', views.login_view, name='login'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
