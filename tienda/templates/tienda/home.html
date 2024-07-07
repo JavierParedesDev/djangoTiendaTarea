@@ -6,99 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop in Style</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="{% static 'style_home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ScxV9NR2l9dNwgaGW0lJ0I7k+s62Fi2YC3N0ES3G9HTmg+F1JzhFvaxUueT/8e3dbYnqSpIlUJipQJ2bTzBL6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
     <nav class="nav">
-        <h1 class="nav-a"href="{% url 'home' %}">Start Shop</h1>
+        <h1><a class="nav-a" href="{% url 'home' %}">Start Shop</a></h1>
         <div>
             <ul>
                 <li>
                     <a href="{% url 'home' %}">Inicio</a>
                 </li>
                 <li>
-                    <a href="{% url 'login' %}" > Iniciar Sesión</a> 
+                    <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li>
+                            <a href="{% url 'dashboard' %}">Administrar</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                    <li>
+                        <span>{{ user.username }}</span>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
-      </nav>
-<br>
-<br>
-<div class="banner">
-    <div class="banner-images">
-        <img src="{% static 'img/banner2.png' %}" alt="">
-        <img src="{% static 'img/banner.png' %}" alt="">
+    </nav>
+
+    <br>
+    <br>
+
+    <div class="banner">
+        <div class="banner-images">
+            <img src="{% static 'img/banner2.png' %}" alt="">
+            <img src="{% static 'img/banner.png' %}" alt="">
+        </div>
+        <a id="productos" class="button">
+            <i class="fas fa-arrow-down"><img src="{% static 'img/flecha.png' %}" alt="" style="width: 30px; height: 20px;"></i>
+        </a>
     </div>
-    <a id="productos" class="button">
-        <i class="fas fa-arrow-down"><img src="{% static 'img/flecha.png' %}" alt="" style="width: 30px; height: 20px;"></i>
-    </a>
-</div>
-      
 
     <section class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{% static 'img/audifono.jpg' %}" alt="" class="img-fixed-size">
+                {% for producto in productos %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
                         <div class="card-body">
-                            <h5 class="card-title">Audifonos Lila</h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text text-muted"><del>$30.00</del> $20.00</p>
-                                <p class="card-text text-warning"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></p>
+                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir al carrito</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted">${{ producto.precio }}</small>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="boton">Añadir a carrito</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{% static 'img/audifono(2).jpg' %}"  class="img-fixed-size card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Audifonos con cable</h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text text-muted"><del>$20.00</del> $15.00</p>
-                                <p class="card-text text-warning"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></p>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="boton">Añadir a carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{% static 'img/audifono(3).jpg' %}" class="img-fixed-size card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Audifonos colores</h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text text-muted"><del>$20.00</del> $11.00</p>
-                                <p class="card-text text-warning"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></p>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="boton" >Añadir a carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{% static 'img/parlante.jpg' %}" class="img-fixed-size card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Parlante </h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text text-muted"><del>$50.00</del> $25.00</p>
-                                <p class="card-text text-warning"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></p>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#"  class="boton">Añadir a carrito</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -107,7 +89,7 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Sobre Nosotros</h3>
-                <p>Somos una empresa dedicada a la venta de productos electronicos</p>
+                <p>Somos una empresa dedicada a la venta de productos electrónicos</p>
             </div>
             <div class="footer-section">
                 <h3>Enlaces</h3>
@@ -152,8 +134,4 @@
     </script>
 
 </body>
-<style>
-    
-
-</style>
 </html>
