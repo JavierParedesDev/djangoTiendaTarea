@@ -15,6 +15,8 @@
                 <li><a href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
                 <li><a href="{% url 'lista_productos' %}">Lista de Productos</a></li>
                 <li><a href="{% url 'crear_admin' %}">Crear Usuario</a></li>
+                <!-- Agregar enlace a la sección de Tienda -->
+                <li><a href="{% url 'home' %}">Tienda</a></li>
             </ul>
             <!-- Mostrar nombre de usuario conectado -->
             <div class="username">
@@ -22,7 +24,7 @@
                     <p>Bienvenido, {{ request.user.username }}</p>
                 {% endif %}
             </div>
-            <!-- Fin de la sección de nombre de usuario -->
+    
             <div class="logout">
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
