@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop in Style</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_modal.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ScxV9NR2l9dNwgaGW0lJ0I7k+s62Fi2YC3N0ES3G9HTmg+F1JzhFvaxUueT/8e3dbYnqSpIlUJipQJ2bTzBL6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -64,12 +65,28 @@
                 {% for producto in productos %}
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
+                        {% if producto.imagen %}
                         <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                        <img class="card-img-top" src="{% static 'img/placeholder.jpg' %}" alt="Producto sin imagen">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#productModal"
+                                        data-nombre="{{ producto.nombre }}"
+                                        data-descripcion="{{ producto.descripcion }}"
+                                        data-precio="{{ producto.precio }}"
+                                        {% if producto.imagen %}
+                                        data-imagen="{{ producto.imagen.url }}"
+                                        {% else %}
+                                        data-imagen="{% static 'img/placeholder.jpg' %}"
+                                        {% endif %}
+                                    >
+                                        Ver detalles
+                                    </button>
                                     <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir al carrito</button>
@@ -84,6 +101,30 @@
             </div>
         </div>
     </section>
+
+   <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-product-image" src="" class="img-fluid mb-3" alt="Imagen del producto">
+                    <h5 id="modal-product-name"></h5>
+                    <p id="modal-product-description"></p>
+                    <p class="text-muted" id="modal-product-price"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <div class="footer-container">
@@ -119,7 +160,29 @@
             <p>&copy; 2024 Start Shop. Todos los derechos reservados.</p>
         </div>
     </footer>
-   
+
+ 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#productModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Botón que activó el modal
+            var nombre = button.data('nombre')
+            var descripcion = button.data('descripcion')
+            var precio = button.data('precio')
+            var imagen = button.data('imagen')
+    
+            var modal = $(this)
+            modal.find('.modal-title').text('Detalles del Producto: ' + nombre)
+            modal.find('#modal-product-name').text(nombre)
+            modal.find('#modal-product-description').text(descripcion)
+            modal.find('#modal-product-price').text('$' + precio)
+            modal.find('#modal-product-image').attr('src', imagen)
+        })
+    </script>
+
     <script>
         const button = document.querySelector('.button');
 
@@ -132,6 +195,8 @@
             });
         });
     </script>
+</body>
+</html>
 
 </body>
 </html>
