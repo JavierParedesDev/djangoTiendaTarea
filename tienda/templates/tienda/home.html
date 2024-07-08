@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop in Style</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_modal.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ScxV9NR2l9dNwgaGW0lJ0I7k+s62Fi2YC3N0ES3G9HTmg+F1JzhFvaxUueT/8e3dbYnqSpIlUJipQJ2bTzBL6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -64,7 +65,11 @@
                 {% for producto in productos %}
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
+                        {% if producto.imagen %}
                         <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                        <img class="card-img-top" src="{% static 'img/placeholder.jpg' %}" alt="Producto sin imagen">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <p class="card-text">{{ producto.descripcion }}</p>
@@ -74,7 +79,12 @@
                                         data-nombre="{{ producto.nombre }}"
                                         data-descripcion="{{ producto.descripcion }}"
                                         data-precio="{{ producto.precio }}"
-                                        data-imagen="{% static 'img/'|add:producto.imagen %}">
+                                        {% if producto.imagen %}
+                                        data-imagen="{{ producto.imagen.url }}"
+                                        {% else %}
+                                        data-imagen="{% static 'img/placeholder.jpg' %}"
+                                        {% endif %}
+                                    >
                                         Ver detalles
                                     </button>
                                     <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
@@ -92,7 +102,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+   <!-- Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -114,6 +124,7 @@
             </div>
         </div>
     </div>
+
 
     <footer>
         <div class="footer-container">
@@ -162,7 +173,7 @@
             var descripcion = button.data('descripcion')
             var precio = button.data('precio')
             var imagen = button.data('imagen')
-
+    
             var modal = $(this)
             modal.find('.modal-title').text('Detalles del Producto: ' + nombre)
             modal.find('#modal-product-name').text(nombre)
@@ -186,21 +197,6 @@
     </script>
 </body>
 </html>
-<style>
-.modal-body img {
-    max-width: 100%;
-    height: auto;
-}
 
-.modal-body h5 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.modal-body p {
-    margin-bottom: 1rem;
-}
-
-</style>
 </body>
 </html>
