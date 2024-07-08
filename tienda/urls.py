@@ -21,6 +21,7 @@ urlpatterns = [
     path('eliminar-del-carrito/<int:item_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('procesar-pago/', views.procesar_pago, name='procesar_pago'),
     path('login/', views.login_view, name='login'),
+    path('editar-producto/<int:producto_id>/', views.editar_producto, name='editar_producto'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
