@@ -99,15 +99,17 @@ def crear_admin(request):
     return render(request, 'crear_admin.html', {'form': form, 'users': users})
 
 @login_required
-def editar_producto(request, pk):
-    producto = get_object_or_404(Producto, pk=pk)
+def editar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, pk=producto_id)
+    
     if request.method == 'POST':
-        form = ProductoForm(request.POST, instance=producto)
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
-            return redirect('lista_productos')
+            return redirect('lista_productos')  # Redirige a la lista de productos después de guardar
     else:
         form = ProductoForm(instance=producto)
+    
     return render(request, 'editar_producto.html', {'form': form})
 
 @login_required
