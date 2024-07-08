@@ -47,3 +47,9 @@ class DetalleCompraForm(forms.ModelForm):
     class Meta:
         model = DetalleCompra
         fields = ['producto', 'cantidad']
+
+class ContactoForm(forms.Form):
+    nombre = forms.CharField(max_length=100, label='Nombre')
+    correo_electronico = forms.EmailField(label='  Email')
+    mensaje = forms.CharField(widget=forms.Textarea, label='Mensaje')
+

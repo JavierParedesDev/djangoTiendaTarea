@@ -7,7 +7,8 @@ from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm, UserCreat
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-
+from django.shortcuts import render, redirect
+from .forms import ContactoForm
 
 # Vistas relacionadas con el usuario y la tienda
 
@@ -196,3 +197,22 @@ def procesar_pago(request):
     
     # Si no es un POST, probablemente deberías manejarlo de otra manera (por ejemplo, redirigiendo a una página de error)
     return redirect('home')  # Redirige a la página de inicio o a otra página apropiada
+
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Procesar los datos del formulario, por ejemplo, enviando un correo electrónico
+            nombre = form.cleaned_data['nombre']
+            correo_electronico = form.cleaned_data['correo_electronico']
+            mensaje = form.cleaned_data['mensaje']
+            
+            # Aquí puedes agregar la lógica para enviar el correo o guardar los datos
+            # Para el propósito de este ejemplo, simplemente mostramos un mensaje de éxito
+            messages.success(request, '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.')
+            return redirect('contacto')
+    else:
+        form = ContactoForm()
+    
+    return render(request, 'tienda/contacto.html', {'form': form})

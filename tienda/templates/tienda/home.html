@@ -22,6 +22,9 @@
                 <li>
                     <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
+                <li>
+                    <a href="{% url 'contacto' %}">Contacto</a>
+                </li>
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
                         <li>
@@ -45,7 +48,7 @@
             </ul>
         </div>
     </nav>
-
+    
     <br>
     <br>
 
