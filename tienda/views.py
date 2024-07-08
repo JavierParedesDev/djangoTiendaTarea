@@ -198,3 +198,6 @@ def procesar_pago(request):
     
     # Si no es un POST, probablemente deberías manejarlo de otra manera (por ejemplo, redirigiendo a una página de error)
     return redirect('home')  # Redirige a la página de inicio o a otra página apropiada
+
+def ofertas(request):
+    return render(request, 'tienda/ofertas.html')

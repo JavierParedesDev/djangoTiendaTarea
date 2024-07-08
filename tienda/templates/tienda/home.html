@@ -20,6 +20,9 @@
                     <a href="{% url 'home' %}">Inicio</a>
                 </li>
                 <li>
+                    <a href="{% url 'ofertas' %}">Ofertas</a>  <!-- Nuevo enlace a Ofertas -->
+                </li>
+                <li>
                     <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
                 {% if user.is_authenticated %}

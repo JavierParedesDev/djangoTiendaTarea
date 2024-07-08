@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+.banner {
+    background: linear-gradient(135deg, #44106e 30%, #f80269 100%);
+    color: white;
+    padding: 50px 0;
+    text-align: center;
+    border-radius: 15px;
+    margin: 50px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.banner h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.banner p {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}

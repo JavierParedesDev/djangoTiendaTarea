@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_ofertas.css' %}">
+</head>
+<body>
+    <nav class="nav">
+        <h1><a class="nav-a" href="{% url 'home' %}">Start Shop</a></h1>
+        <div>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'ver_carrito' %}">Carrito</a>
+                </li>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="banner">
+            <h1>Ofertas</h1>
+            <p>Aquí encontrarás las mejores ofertas disponibles!!!</p>
+            <a id="productos" class="button">
+                <i class="fas fa-arrow-down"><img src="{% static 'img/flecha.png' %}" alt="" style="width: 30px; height: 20px;"></i>
+            </a>
+        </div>
+        <!-- Agrega aquí el contenido de las ofertas -->
+    </div>
+    <script>
+        const button = document.querySelector('.button');
+
+        button.addEventListener('click', () => {
+            const productsSection = document.getElementById('productos');
+            const sectionTop = productsSection.offsetTop;
+            window.scrollTo({
+                top: sectionTop,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
