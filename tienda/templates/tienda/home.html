@@ -76,16 +76,15 @@
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         {% if producto.imagen %}
-                        <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        <img class="card-img-top img-card" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
                         {% else %}
-                        <img class="card-img-top" src="{% static 'img/placeholder.jpg' %}" alt="Producto sin imagen">
+                        <img class="card-img-top img-card" src="{% static 'img/placeholder.jpg' %}" alt="Producto sin imagen">
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
-                            <p class="card-text">{{ producto.descripcion }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#productModal"
+                                    <button type="button" class="boton-detalle" data-toggle="modal" data-target="#productModal"
                                         data-nombre="{{ producto.nombre }}"
                                         data-descripcion="{{ producto.descripcion }}"
                                         data-precio="{{ producto.precio }}"
@@ -99,10 +98,10 @@
                                     </button>
                                     <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir al carrito</button>
+                                        <button type="submit" class="boton">Añadir al carrito</button>
                                     </form>
                                 </div>
-                                <small class="text-muted">${{ producto.precio }}</small>
+                                <small class="precio">${{ producto.precio|floatformat:"0" }}</small>
                             </div>
                         </div>
                     </div>
