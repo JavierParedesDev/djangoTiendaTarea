@@ -1,12 +1,17 @@
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
     padding: 20px;
     background-color: #f8f9fa;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-left: 10px; /* Ajusta este valor según sea necesario */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 h1 {
     text-align: center;
