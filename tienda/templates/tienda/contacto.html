@@ -1,0 +1,79 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop in Style</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_contacto.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/btn_extras.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ScxV9NR2l9dNwgaGW0lJ0I7k+s62Fi2YC3N0ES3G9HTmg+F1JzhFvaxUueT/8e3dbYnqSpIlUJipQJ2bTzBL6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+
+
+</head>
+<body>
+    <nav class="nav">
+        <h1><a class="nav-a" href="{% url 'home' %}">Start Shop</a></h1>
+        <div>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Inicio</a>
+                </li>
+                <li>
+                    <a href="{% url 'ofertas' %}">Ofertas</a>
+                </li>
+                <li>
+                    <a href="{% url 'productos' %}">Productos</a>
+                </li>
+                <li>
+                    <a href="{% url 'ver_carrito' %}">Carrito</a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li>
+                            <a href="{% url 'dashboard' %}">Administrar</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-cerrar">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                    <li>
+                        <span>{{ user.username }}</span>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Contacto</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn">Enviar</button>
+        </form>
+        {% if messages %}
+            <div class="alert alert-success mt-3">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style></style>
+</body>
+</html>
+
+    

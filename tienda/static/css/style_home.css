@@ -64,6 +64,10 @@ nav ul li a {
 nav ul li a:hover {
     color: white; /* letras del nav  */ 
 }
+.precio{
+    font-size: 12px;
+    font-weight: bold;
+}
 
 .nav-a {
     text-decoration: none; /* Sin subrayado */
@@ -120,14 +124,21 @@ nav ul li a:hover {
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    height: 100%;
 }
 
 .card:hover {
     transform: translateY(-5px);
 }
-
+.card-body{
+    width: 100%;
+    font-size: 10px;
+}
+.img-card{
+    width: 200px;
+}
 .card-body h5 {
-    font-size: 1.25rem;
+    font-size: 10px;
     font-weight: bold;
 }
 
@@ -148,16 +159,32 @@ nav ul li a:hover {
 }
 
 .boton {
-    display: inline-block; /* Hace que el enlace se comporte como un bloque en línea */
-    background-color: #44106e; /* Color de fondo del botón */
-    color: #fff; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interior */
-    text-decoration: none; /* Sin subrayado */
-    border-radius: 5px; /* Borde redondeado */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    display: inline-block;
+    background-color: #44106e; 
+    color: #fff;
+    padding: 10px 20px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+    border: none;
     
     &:hover {
         background-color: #f80269; /* Color de fondo al hacer hover */
+    }
+}
+.boton-detalle {
+    display: inline-block;
+    background-color: #00ca00; 
+    color: #fff;
+    padding: 10px 20px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+    border: none;
+    margin-right: 5px;
+    
+    &:hover {
+        background-color:#009700; /* Color de fondo al hacer hover */
     }
 }
 .boton:hover{
