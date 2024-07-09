@@ -233,3 +233,9 @@ def contacto(request):
         form = ContactoForm()
     
     return render(request, 'tienda/contacto.html', {'form': form})
+
+def ofertas(request):
+    return render(request, 'tienda/ofertas.html')
+def productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'tienda/productos.html', {'productos': productos})

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
     <link rel="stylesheet" href="{% static 'css/style_modal.css' %}">
     <link rel="stylesheet" href="{% static 'css/style_contacto.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/btn_extras.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ScxV9NR2l9dNwgaGW0lJ0I7k+s62Fi2YC3N0ES3G9HTmg+F1JzhFvaxUueT/8e3dbYnqSpIlUJipQJ2bTzBL6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    
 
@@ -23,6 +24,12 @@
                     <a href="{% url 'home' %}">Inicio</a>
                 </li>
                 <li>
+                    <a href="{% url 'ofertas' %}">Ofertas</a>
+                </li>
+                <li>
+                    <a href="{% url 'productos' %}">Productos</a>
+                </li>
+                <li>
                     <a href="{% url 'ver_carrito' %}">Carrito</a>
                 </li>
                 {% if user.is_authenticated %}
@@ -34,7 +41,7 @@
                     <li>
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-link">Cerrar Sesión</button>
+                            <button type="submit" class="btn-cerrar">Cerrar Sesión</button>
                         </form>
                     </li>
                     <li>
