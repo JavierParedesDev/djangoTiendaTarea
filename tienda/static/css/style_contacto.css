@@ -1,0 +1,31 @@
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-left: 10px; /* Ajusta este valor según sea necesario */
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6c757d;
+}
+.btn {
+    width: 100%;
+    background-color: #44106e;
+    transition: background-color 0.3s ease;
+    color: #f8f9fa;
+}
+.btn:hover {
+    background-color: #f80269;
+    color: #f8f9fa;
+}
+.alert {
+    text-align: center;
+}
+
+
+

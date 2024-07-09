@@ -48,8 +48,16 @@ class DetalleCompraForm(forms.ModelForm):
         model = DetalleCompra
         fields = ['producto', 'cantidad']
 
+<<<<<<< HEAD
 class PaymentForm(forms.Form):
     nombre = forms.CharField(label='Nombre en la tarjeta', max_length=100, required=True)
     numero_tarjeta = forms.CharField(label='Número de tarjeta', max_length=16, required=True)
     fecha_expiracion = forms.DateField(label='Fecha de expiración', required=True, widget=forms.DateInput(attrs={'type': 'date'}))
     cvv = forms.CharField(label='CVV', max_length=4, required=True, widget=forms.PasswordInput)
+=======
+class ContactoForm(forms.Form):
+    nombre = forms.CharField(max_length=100, label='Nombre')
+    correo_electronico = forms.EmailField(label='  Email')
+    mensaje = forms.CharField(widget=forms.Textarea, label='Mensaje')
+
+>>>>>>> origin/vista_contactos
