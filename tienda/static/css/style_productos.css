@@ -1,0 +1,37 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #6a11cb;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+
+.btn-primary {
+    background: #6a11cb;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #2575fc;
+}
