@@ -7,9 +7,9 @@ from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm, UserCreat
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from .forms import PaymentForm
-
-
+from django.shortcuts import render, redirect
+from .forms import PaymentForm, ContactoForm
+from django.contrib.auth.models import User
 # Vistas relacionadas con el usuario y la tienda
 
 def home(request):
@@ -181,10 +181,14 @@ def procesar_pago(request):
 
     total = calcular_total_carrito(carrito)
 
+def procesar_pago(request):
+    carrito = obtener_carrito_usuario(request.user)
+    total = calcular_total_carrito(carrito)
+    
     if request.method == 'POST':
         form = PaymentForm(request.POST)
         if form.is_valid():
-
+            # Crear detalles de compra basados en los elementos del carrito
             for item in carrito.items.all():
                 DetalleCompra.objects.create(
                     usuario=request.user,
@@ -192,8 +196,10 @@ def procesar_pago(request):
                     cantidad=item.cantidad
                 )
 
+            # Limpiar el carrito eliminando todos los elementos
             carrito.items.all().delete()
 
+            # Mensaje de pago exitoso
             messages.success(request, '¡Pago exitoso! Gracias por tu compra.')
             return redirect('ver_carrito')
     else:
@@ -209,3 +215,27 @@ def calcular_total_carrito(carrito):
     items = carrito.items.all()
     total = sum(item.producto.precio * item.cantidad for item in items)
     return total
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Procesar los datos del formulario, por ejemplo, enviando un correo electrónico
+            nombre = form.cleaned_data['nombre']
+            correo_electronico = form.cleaned_data['correo_electronico']
+            mensaje = form.cleaned_data['mensaje']
+            
+            # Aquí puedes agregar la lógica para enviar el correo o guardar los datos
+            # Para el propósito de este ejemplo, simplemente mostramos un mensaje de éxito
+            messages.success(request, '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.')
+            return redirect('contacto')
+    else:
+        form = ContactoForm()
+    
+    return render(request, 'tienda/contacto.html', {'form': form})
+
+def ofertas(request):
+    return render(request, 'tienda/ofertas.html')
+def productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'tienda/productos.html', {'productos': productos})

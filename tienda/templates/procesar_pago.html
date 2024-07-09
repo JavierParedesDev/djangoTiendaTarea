@@ -31,20 +31,25 @@
     </script>
 </head>
 <body>
-    <h1>Pago</h1>
-    <p>Total a pagar: ${{ total }}</p>
+    <div class="container">
+        <h1>Pago</h1>
 
-    <img src="{% static 'img/thepay.png' %}" alt="The Pay Image">
+        <img src="{% static 'img/logo.jfif' %}" alt="The Pay Image">
 
-    <form method="post">
-        {% csrf_token %}
-        <label for="nombre">Nombre en la tarjeta:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
-        <label for="tarjeta">Número de tarjeta:</label>
-        <input type="text" id="tarjeta" name="tarjeta" required><br><br>
+        <form method="post">
+            {% csrf_token %}
+            <label for="nombre">Nombre en la tarjeta:</label>
+            <input type="text" id="nombre" name="nombre" required><br><br>
+            <label for="tarjeta">Número de tarjeta:</label>
+            <input type="text" id="tarjeta" name="tarjeta" required><br><br>
 
-        <button type="button" id="btnPagar" class="btn btn-primary">Pagar</button>
-    </form>
+            <button type="button" id="btnPagar" class="">Pagar ${{ total|floatformat:"0" }}</button>
+
+            <a class="cancelar" href="{% url 'home' %}">cancelar transacción</a>
+        </form>
+
+    </div>
+    
 
     <div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="modalPagoLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

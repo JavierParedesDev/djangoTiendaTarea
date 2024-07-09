@@ -42,7 +42,11 @@
         <div class="item-carrito card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="{{ item.producto.imagen.url }}" class="img-fluid rounded-start" alt="{{ item.producto.nombre }}">
+                    {% if item.producto.imagen %}
+                        <img src="{{ item.producto.imagen.url }}" class="img-fluid rounded-start" alt="{{ item.producto.nombre }}">
+                    {% else %}
+                        <p>No hay imagen disponible</p>
+                    {% endif %}
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
