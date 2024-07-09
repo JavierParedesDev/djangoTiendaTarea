@@ -1,0 +1,11 @@
+/* pago.css */
+
+body {
+    text-align: center;  /* Centra todo el contenido dentro del body */
+}
+
+img {
+    max-width: 200px;  /* Establece el ancho máximo de la imagen */
+    display: block;    /* Hace que la imagen se muestre como bloque */
+    margin: 0 auto;    /* Centra la imagen horizontalmente */
+}
