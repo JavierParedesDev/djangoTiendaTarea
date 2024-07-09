@@ -7,6 +7,7 @@ from .forms import AdminCreationForm, ProductoForm, DetalleCompraForm, UserCreat
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from .forms import PaymentForm
 
 
 # Vistas relacionadas con el usuario y la tienda
@@ -173,28 +174,38 @@ def eliminar_del_carrito(request, item_id):
 
 @login_required
 def procesar_pago(request):
+    carrito = obtener_carrito_usuario(request.user)
+    if not carrito:
+        messages.error(request, 'No hay productos en tu carrito.')
+        return redirect('ver_carrito')
+
+    total = calcular_total_carrito(carrito)
+
     if request.method == 'POST':
-        # Lógica para procesar el pago (puedes agregar la integración con un proveedor de pagos aquí)
-        
-        # Obtener todos los elementos del carrito para el usuario actual
-        items_carrito = ItemCarrito.objects.filter(carrito__usuario=request.user)
-        
-        # Crear detalles de compra basados en los elementos del carrito
-        for item in items_carrito:
-            DetalleCompra.objects.create(
-                usuario=request.user,
-                producto=item.producto,
-                cantidad=item.cantidad
-            )
-        
-        # Limpiar el carrito eliminando todos los elementos
-        items_carrito.delete()
-        
-        # Mensaje de pago exitoso
-        messages.success(request, '¡Pago exitoso! Gracias por tu compra.')
-        
-        # Redirigir a una página de confirmación o a donde desees después del pago
-        return redirect('ver_carrito')  # Ajusta la URL según sea necesario
-    
-    # Si no es un POST, probablemente deberías manejarlo de otra manera (por ejemplo, redirigiendo a una página de error)
-    return redirect('home')  # Redirige a la página de inicio o a otra página apropiada
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+
+            for item in carrito.items.all():
+                DetalleCompra.objects.create(
+                    usuario=request.user,
+                    producto=item.producto,
+                    cantidad=item.cantidad
+                )
+
+            carrito.items.all().delete()
+
+            messages.success(request, '¡Pago exitoso! Gracias por tu compra.')
+            return redirect('ver_carrito')
+    else:
+        form = PaymentForm()
+
+    return render(request, 'procesar_pago.html', {'form': form, 'total': total})
+
+def obtener_carrito_usuario(usuario):
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario)
+    return carrito
+
+def calcular_total_carrito(carrito):
+    items = carrito.items.all()
+    total = sum(item.producto.precio * item.cantidad for item in items)
+    return total
